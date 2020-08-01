@@ -1,0 +1,14 @@
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.container {
+  display: flex;
+  height: 100px;
+  text-align: center;
+  background: rgba(10, 10, 10, 0.5);
+  color: white;
+  justify-content: center;
+}

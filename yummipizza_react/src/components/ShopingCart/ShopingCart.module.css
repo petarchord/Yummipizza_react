@@ -1,0 +1,14 @@
+.container {
+  margin: 0% 41%;
+  width: 20%;
+  position: relative;
+}
+
+.shoping_cart {
+  padding: 2%;
+  border: solid 1px lightgray;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}

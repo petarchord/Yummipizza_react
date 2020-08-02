@@ -45,6 +45,7 @@ const MenuItem = ({ id, name, price, quantity }) => {
             onClick={() => {
               decrementQuantity(id);
             }}
+            disabled={quantity <= 1 ? true : false}
           >
             -
           </button>

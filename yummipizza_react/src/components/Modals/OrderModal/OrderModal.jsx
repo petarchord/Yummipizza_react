@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./OrderModal.module.css";
 import Modal from "react-modal";
+import SuccessModal from "../SuccessModal/SuccessModal";
 
 Modal.setAppElement("#root");
 const OrderModal = ({ open, setModal, bill }) => {
+  const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const deliveryDollars = (10 * 1.17798).toFixed(2);
+  const orderSubmit = (e) => {
+    e.preventDefault();
+    setModal(false);
+    setSuccessModalIsOpen(true);
+  };
   return (
     <div className={styles.container}>
       <Modal
@@ -41,19 +48,23 @@ const OrderModal = ({ open, setModal, bill }) => {
         >
           x
         </button>
-        <form action="">
+        <form
+          onSubmit={(e) => {
+            orderSubmit(e);
+          }}
+        >
           <div className={styles.input_group}>
             <div className={styles.name_field}>
               <label htmlFor="name">Name: </label>
-              <input type="text" name="name" />
+              <input type="text" name="name" required />
             </div>
             <div className={styles.address_field}>
               <label htmlFor="address">Address: </label>
-              <input type="text" name="address" />
+              <input type="text" name="address" required />
             </div>
             <div className={styles.phone_field}>
               <label htmlFor="phone">Phone: </label>
-              <input type="number" name="phone" />
+              <input type="number" name="phone" required />
             </div>
             <div className={styles.bill}>
               <p>Delivery costs in US Dollars: {parseFloat(deliveryDollars)}</p>
@@ -72,6 +83,10 @@ const OrderModal = ({ open, setModal, bill }) => {
           </div>
         </form>
       </Modal>
+      <SuccessModal
+        successOpen={successModalIsOpen}
+        setSuccessModal={setSuccessModalIsOpen}
+      ></SuccessModal>
     </div>
   );
 };

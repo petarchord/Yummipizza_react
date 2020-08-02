@@ -3,11 +3,13 @@ import styles from "./MenuItem.module.css";
 import { GlobalContext } from "../../context/GlobalState";
 
 const MenuItem = ({ id, name, price, quantity }) => {
-  const { incrementQuantity } = useContext(GlobalContext);
+  const { incrementQuantity, decrementQuantity, increaseBill } = useContext(
+    GlobalContext
+  );
 
-  const onIncrement = (e) => {
-    e.preventDefault();
-    incrementQuantity(id);
+  const AddToShopingCart = () => {
+    const bill = quantity * price;
+    increaseBill(bill);
   };
 
   return (
@@ -21,19 +23,31 @@ const MenuItem = ({ id, name, price, quantity }) => {
         </div>
         <div className={styles.menu_item_info}>
           <h3>{name}</h3>
-          <p>{price}$</p>
-          <button>Add to shoping cart</button>
+          <p>{price}€</p>
+          <button
+            onClick={() => {
+              AddToShopingCart();
+            }}
+          >
+            Add to shoping cart
+          </button>
         </div>
         <div className={styles.quantity}>
           <button
-            onClick={(e) => {
-              onIncrement(e);
+            onClick={() => {
+              incrementQuantity(id);
             }}
           >
             +
           </button>
           <p>{quantity}</p>
-          <button>-</button>
+          <button
+            onClick={() => {
+              decrementQuantity(id);
+            }}
+          >
+            -
+          </button>
         </div>
       </div>
     </div>

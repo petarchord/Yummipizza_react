@@ -3,7 +3,8 @@ import styles from "./OrderModal.module.css";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
-const OrderModal = ({ open, setModal }) => {
+const OrderModal = ({ open, setModal, bill }) => {
+  const deliveryDollars = (10 * 1.17798).toFixed(2);
   return (
     <div className={styles.container}>
       <Modal
@@ -53,6 +54,15 @@ const OrderModal = ({ open, setModal }) => {
             <div className={styles.phone_field}>
               <label htmlFor="phone">Phone: </label>
               <input type="number" name="phone" />
+            </div>
+            <div className={styles.bill}>
+              <p>Delivery costs in US Dollars: {parseFloat(deliveryDollars)}</p>
+              <p>Delivery costs in Euros: 10€</p>
+              <p>
+                Your total bill in US dollars:
+                {bill + parseFloat(deliveryDollars)}$!
+              </p>
+              <p>Your total bill in Euros: {bill + 10}€!</p>
             </div>
             <input
               type="submit"

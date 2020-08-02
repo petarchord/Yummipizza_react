@@ -30,6 +30,7 @@ const initialState = {
       quantity: 1,
     },
   ],
+  bill: 0,
 };
 
 //create context
@@ -50,11 +51,28 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function decrementQuantity(id) {
+    dispatch({
+      type: "DECREMENT_QUANTITY",
+      payload: id,
+    });
+  }
+
+  function increaseBill(price) {
+    dispatch({
+      type: "INCREASE_BILL",
+      payload: price,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         menu: state.menu,
+        bill: state.bill,
         incrementQuantity,
+        decrementQuantity,
+        increaseBill,
       }}
     >
       {children}

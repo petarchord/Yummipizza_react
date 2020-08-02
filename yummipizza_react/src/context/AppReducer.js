@@ -10,6 +10,24 @@ export default (state, action) => {
           return item;
         }),
       };
+
+    case "DECREMENT_QUANTITY":
+      return {
+        ...state,
+        menu: state.menu.map((item) => {
+          if (item.id === action.payload) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+
+          return item;
+        }),
+      };
+
+    case "INCREASE_BILL":
+      return {
+        ...state,
+        bill: state.bill + action.payload,
+      };
     default:
       return state;
   }

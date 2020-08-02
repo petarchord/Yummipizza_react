@@ -1,3 +1,6 @@
+.container {
+}
+
 #cancel_button {
   position: absolute;
   top: 2%;
@@ -9,6 +12,11 @@
   flex-direction: column;
   align-items: center;
   margin: 12% 0%;
+}
+
+.input_group input {
+  height: 20px;
+  width: 200px;
 }
 
 .name_field {
@@ -28,4 +36,8 @@
   width: 50%;
   /* height: 23%; */
   height: 40px;
+}
+
+#heading_modal {
+  font-size: 30px;
 }

@@ -4,8 +4,6 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 const OrderModal = ({ open, setModal }) => {
-  console.log(open);
-  console.log(setModal);
   return (
     <div className={styles.container}>
       <Modal
@@ -33,7 +31,7 @@ const OrderModal = ({ open, setModal }) => {
           },
         }}
       >
-        <h3>Enter your information</h3>
+        <h3 id={styles.heading_modal}>Enter your information</h3>
         <button
           onClick={() => {
             setModal(false);

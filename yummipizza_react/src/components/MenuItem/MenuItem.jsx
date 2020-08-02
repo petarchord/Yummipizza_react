@@ -3,13 +3,23 @@ import styles from "./MenuItem.module.css";
 import { GlobalContext } from "../../context/GlobalState";
 
 const MenuItem = ({ id, name, price, quantity }) => {
-  const { incrementQuantity, decrementQuantity, increaseBill } = useContext(
-    GlobalContext
-  );
+  const {
+    incrementQuantity,
+    decrementQuantity,
+    increaseBill,
+    addOrderItem,
+  } = useContext(GlobalContext);
 
   const AddToShopingCart = () => {
     const bill = quantity * price;
     increaseBill(bill);
+    const menuItem = {
+      id,
+      name,
+      price,
+      quantity,
+    };
+    addOrderItem(menuItem);
   };
 
   return (

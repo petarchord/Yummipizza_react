@@ -31,6 +31,7 @@ const initialState = {
     },
   ],
   bill: 0,
+  order: [],
 };
 
 //create context
@@ -65,14 +66,31 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function addOrderItem(item) {
+    dispatch({
+      type: "ADD_ORDER_ITEM",
+      payload: item,
+    });
+  }
+
+  function removeOrderItem(id) {
+    dispatch({
+      type: "REMOVE_ORDER_ITEM",
+      payload: id,
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         menu: state.menu,
         bill: state.bill,
+        order: state.order,
         incrementQuantity,
         decrementQuantity,
         increaseBill,
+        addOrderItem,
+        removeOrderItem,
       }}
     >
       {children}

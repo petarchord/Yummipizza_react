@@ -28,6 +28,11 @@ export default (state, action) => {
         ...state,
         bill: state.bill + action.payload,
       };
+    case "ADD_ORDER_ITEM":
+      return {
+        ...state,
+        order: [action.payload, ...state.order],
+      };
     default:
       return state;
   }

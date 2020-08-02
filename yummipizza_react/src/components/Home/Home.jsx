@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Home.module.css";
-
 import Menu from "../Menu/Menu";
 import ShopingCart from "../ShopingCart/ShopingCart";
 

@@ -33,6 +33,12 @@ export default (state, action) => {
         ...state,
         order: [action.payload, ...state.order],
       };
+    case "REMOVE_ORDER_ITEM":
+      return {
+        ...state,
+        order: state.order.filter((item) => item.id !== action.payload.id),
+        bill: state.bill - action.payload.price * action.payload.quantity,
+      };
     default:
       return state;
   }

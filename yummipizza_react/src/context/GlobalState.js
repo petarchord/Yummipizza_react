@@ -73,10 +73,10 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-  function removeOrderItem(id) {
+  function removeOrderItem(item) {
     dispatch({
       type: "REMOVE_ORDER_ITEM",
-      payload: id,
+      payload: item,
     });
   }
 

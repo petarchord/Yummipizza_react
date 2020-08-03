@@ -11,6 +11,7 @@ const Order = () => {
       {order.map((orderItem) => (
         <OrderItem
           key={orderItem.id}
+          id={orderItem.id}
           name={orderItem.name}
           price={orderItem.price}
           quantity={orderItem.quantity}

@@ -39,6 +39,12 @@ export default (state, action) => {
         order: state.order.filter((item) => item.id !== action.payload.id),
         bill: state.bill - action.payload.price * action.payload.quantity,
       };
+
+    case "FETCH_MENU":
+      return {
+        ...state,
+        menu: [action.payload, ...state.menu],
+      };
     default:
       return state;
   }

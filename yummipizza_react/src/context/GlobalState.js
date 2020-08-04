@@ -5,30 +5,30 @@ import AppReducer from "./AppReducer";
 
 const initialState = {
   menu: [
-    {
-      id: 1,
-      name: "Capricoza",
-      price: 10,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "Margarita",
-      price: 10,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      name: "Quatro",
-      price: 10,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      name: "Napolitana",
-      price: 10,
-      quantity: 1,
-    },
+    // {
+    //   id: 1,
+    //   name: "Capricoza",
+    //   price: 10,
+    //   quantity: 1,
+    // },
+    // {
+    //   id: 2,
+    //   name: "Margarita",
+    //   price: 10,
+    //   quantity: 1,
+    // },
+    // {
+    //   id: 3,
+    //   name: "Quatro",
+    //   price: 10,
+    //   quantity: 1,
+    // },
+    // {
+    //   id: 4,
+    //   name: "Napolitana",
+    //   price: 10,
+    //   quantity: 1,
+    // },
   ],
   bill: 0,
   order: [],
@@ -44,6 +44,13 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //actions
+
+  function fetchMenu(menu) {
+    dispatch({
+      type: "FETCH_MENU",
+      payload: menu,
+    });
+  }
 
   function incrementQuantity(id) {
     dispatch({
@@ -91,6 +98,7 @@ export const GlobalProvider = ({ children }) => {
         increaseBill,
         addOrderItem,
         removeOrderItem,
+        fetchMenu,
       }}
     >
       {children}

@@ -1,11 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./Menu.module.css";
+import { fetchData } from "../../api";
 
 import MenuItem from "../MenuItem/MenuItem";
 import { GlobalContext } from "../../context/GlobalState";
 
 const Menu = () => {
-  const { menu } = useContext(GlobalContext);
+  // let { menu, fetchMenu } = useContext(GlobalContext);
+  const [menu, setMenu] = useState([]);
+
+  useEffect(() => {
+    const fetchAPI = async () => {
+      // console.log();
+      setMenu(await fetchData());
+    };
+
+    fetchAPI();
+  }, [setMenu]);
+
+  if (menu.length === 0) {
+    return "...";
+  }
+
   return (
     <div className={styles.container}>
       {menu.map((menuitem) => (

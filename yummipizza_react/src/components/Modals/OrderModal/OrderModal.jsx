@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import styles from "./OrderModal.module.css";
 import Modal from "react-modal";
 import SuccessModal from "../SuccessModal/SuccessModal";
+import { orderApi } from "../../../api";
 
 Modal.setAppElement("#root");
 const OrderModal = ({ open, setModal, bill }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState();
   const deliveryDollars = (10 * 1.17798).toFixed(2);
-  const orderSubmit = (e) => {
+  const orderSubmit = async (e) => {
     e.preventDefault();
+    const data = {
+      name,
+      address,
+      phone,
+      bill,
+    };
+    await orderApi(data);
     setModal(false);
     setSuccessModalIsOpen(true);
   };
@@ -56,15 +67,36 @@ const OrderModal = ({ open, setModal, bill }) => {
           <div className={styles.input_group}>
             <div className={styles.name_field}>
               <label htmlFor="name">Name: </label>
-              <input type="text" name="name" required />
+              <input
+                type="text"
+                name="name"
+                required
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
             </div>
             <div className={styles.address_field}>
               <label htmlFor="address">Address: </label>
-              <input type="text" name="address" required />
+              <input
+                type="text"
+                name="address"
+                required
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+              />
             </div>
             <div className={styles.phone_field}>
               <label htmlFor="phone">Phone: </label>
-              <input type="number" name="phone" required />
+              <input
+                type="number"
+                name="phone"
+                required
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+              />
             </div>
             <div className={styles.bill}>
               <p>Delivery costs in US Dollars: {parseFloat(deliveryDollars)}</p>

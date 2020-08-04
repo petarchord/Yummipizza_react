@@ -5,7 +5,6 @@ import { GlobalContext } from "../../context/GlobalState";
 
 const Order = () => {
   const { order } = useContext(GlobalContext);
-  console.log(order);
   return (
     <div className={styles.container}>
       {order.map((orderItem) => (
@@ -14,6 +13,7 @@ const Order = () => {
           id={orderItem.id}
           name={orderItem.name}
           price={orderItem.price}
+          image={orderItem.image}
           quantity={orderItem.quantity}
         />
       ))}

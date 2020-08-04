@@ -10,3 +10,19 @@ export const fetchData = async () => {
     console.log("error occurred", error);
   }
 };
+
+export const orderApi = async (data) => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: `${baseUrl}/order`,
+      data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+  } catch (error) {
+    console.log("error occurred", error);
+  }
+};

@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import styles from "./OrderItem.module.css";
 import { GlobalContext } from "../../context/GlobalState";
 
-const OrderItem = ({ id, name, price, quantity }) => {
+const OrderItem = ({ id, name, price, image, quantity }) => {
   const { removeOrderItem } = useContext(GlobalContext);
+  const imageUrl = `http://localhost:8000/storage/pizzas/${image}`;
   const onRemoveItem = () => {
     const item = {
       id,
@@ -25,10 +26,7 @@ const OrderItem = ({ id, name, price, quantity }) => {
           x
         </button>
         <div className={styles.menu_item_img}>
-          <img
-            src="https://cdn.donesi.rs/cdn-cgi/image/w=800,h=450,fit=cover,q=100,f=auto/restaurants/2068/banner_item/0000000168600"
-            alt=""
-          />
+          <img src={imageUrl} alt="" />
         </div>
         <div className={styles.menu_item_info}>
           <h3>{name}</h3>

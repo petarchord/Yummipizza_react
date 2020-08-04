@@ -19,6 +19,7 @@ const MenuItem = ({ id, name, price, image }) => {
       id,
       name,
       price,
+      image,
       quantity,
     };
     addOrderItem(menuItem);

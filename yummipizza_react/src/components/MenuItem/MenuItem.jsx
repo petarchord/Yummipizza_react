@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./MenuItem.module.css";
 import { GlobalContext } from "../../context/GlobalState";
 
-const MenuItem = ({ id, name, price, quantity }) => {
+const MenuItem = ({ id, name, price, image }) => {
+  const [quantity, setQuantity] = useState(1);
+  const imageUrl = `http://localhost:8000/storage/pizzas/${image}`;
   const {
     incrementQuantity,
     decrementQuantity,
@@ -26,10 +28,7 @@ const MenuItem = ({ id, name, price, quantity }) => {
     <div className={styles.container}>
       <div className={styles.menu_item}>
         <div className={styles.menu_item_img}>
-          <img
-            src="https://cdn.donesi.rs/cdn-cgi/image/w=800,h=450,fit=cover,q=100,f=auto/restaurants/2068/banner_item/0000000168600"
-            alt=""
-          />
+          <img src={imageUrl} alt="" />
         </div>
         <div className={styles.menu_item_info}>
           <h3>{name}</h3>
@@ -45,7 +44,7 @@ const MenuItem = ({ id, name, price, quantity }) => {
         <div className={styles.quantity}>
           <button
             onClick={() => {
-              incrementQuantity(id);
+              setQuantity(quantity + 1);
             }}
           >
             +
@@ -53,7 +52,7 @@ const MenuItem = ({ id, name, price, quantity }) => {
           <p>{quantity}</p>
           <button
             onClick={() => {
-              decrementQuantity(id);
+              setQuantity(quantity - 1);
             }}
             disabled={quantity <= 1 ? true : false}
           >

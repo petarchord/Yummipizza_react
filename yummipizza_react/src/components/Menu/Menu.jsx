@@ -11,7 +11,8 @@ const Menu = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      // console.log();
+      const data = await fetchData();
+      console.log(data);
       setMenu(await fetchData());
     };
 
@@ -30,7 +31,7 @@ const Menu = () => {
           id={menuitem.id}
           name={menuitem.name}
           price={menuitem.price}
-          quantity={menuitem.quantity}
+          image={menuitem.image}
         />
       ))}
     </div>

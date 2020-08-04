@@ -26,7 +26,15 @@ const ShopingCart = () => {
           $
         </p>
         <p>
-          Your bill in Euros: <CountUp start={0} end={bill} duration={1.5} />€
+          Your bill in Euros:{" "}
+          <CountUp
+            start={0}
+            end={bill}
+            duration={1.5}
+            separator={"."}
+            decimals={2}
+          />
+          €
         </p>
         <button
           onClick={() => {

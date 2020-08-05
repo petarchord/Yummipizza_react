@@ -5,12 +5,7 @@ import { GlobalContext } from "../../context/GlobalState";
 const MenuItem = ({ id, name, price, image }) => {
   const [quantity, setQuantity] = useState(1);
   const imageUrl = `http://localhost:8000/storage/pizzas/${image}`;
-  const {
-    incrementQuantity,
-    decrementQuantity,
-    increaseBill,
-    addOrderItem,
-  } = useContext(GlobalContext);
+  const { increaseBill, addOrderItem } = useContext(GlobalContext);
 
   const AddToShopingCart = () => {
     const bill = quantity * price;

@@ -25,7 +25,10 @@ const SuccessModal = ({ successOpen, setSuccessModal }) => {
         }}
       >
         <div className={styles.success_content}>
-          <img src="https://img.icons8.com/officel/16/000000/checked.png" />
+          <img
+            src="https://img.icons8.com/officel/16/000000/checked.png"
+            alt="success-img"
+          />
           <p>You successfully ordered your food. Buon appetito!</p>
           <button
             onClick={() => {

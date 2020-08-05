@@ -1,28 +1,5 @@
 export default (state, action) => {
   switch (action.type) {
-    case "INCREMENT_QUANTITY":
-      return {
-        ...state,
-        menu: state.menu.map((item) => {
-          if (item.id === action.payload) {
-            return { ...item, quantity: item.quantity + 1 };
-          }
-          return item;
-        }),
-      };
-
-    case "DECREMENT_QUANTITY":
-      return {
-        ...state,
-        menu: state.menu.map((item) => {
-          if (item.id === action.payload) {
-            return { ...item, quantity: item.quantity - 1 };
-          }
-
-          return item;
-        }),
-      };
-
     case "INCREASE_BILL":
       return {
         ...state,
@@ -38,12 +15,6 @@ export default (state, action) => {
         ...state,
         order: state.order.filter((item) => item.id !== action.payload.id),
         bill: state.bill - action.payload.price * action.payload.quantity,
-      };
-
-    case "FETCH_MENU":
-      return {
-        ...state,
-        menu: [action.payload, ...state.menu],
       };
     default:
       return state;

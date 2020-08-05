@@ -33,22 +33,7 @@ const OrderItem = ({ id, name, price, image, quantity }) => {
           <p>{price}€</p>
         </div>
         <div className={styles.quantity}>
-          {/* <button
-            onClick={() => {
-              incrementQuantity(id);
-            }}
-          >
-            +
-          </button> */}
           <p>x{quantity}</p>
-          {/* <button
-            onClick={() => {
-              decrementQuantity(id);
-            }}
-            disabled={quantity <= 1 ? true : false}
-          >
-            -
-          </button> */}
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ const OrderModal = ({ open, setModal, bill }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState();
+  const [phone, setPhone] = useState("");
   const { order } = useContext(GlobalContext);
   const pizzaIds = order.map((item) => item.id);
   const pizzaQuantities = order.map((item) => item.quantity);
@@ -36,8 +36,6 @@ const OrderModal = ({ open, setModal, bill }) => {
         onRequestClose={() => {
           setModal(false);
         }}
-        // className={styles.portal}
-        // overlayClassName={styles.overlay_modal}
         style={{
           overlay: {
             position: "fixed",
@@ -96,7 +94,7 @@ const OrderModal = ({ open, setModal, bill }) => {
             <div className={styles.phone_field}>
               <label htmlFor="phone">Phone: </label>
               <input
-                type="number"
+                type="text"
                 name="phone"
                 required
                 onChange={(e) => {

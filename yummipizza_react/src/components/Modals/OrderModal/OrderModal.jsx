@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./OrderModal.module.css";
 import Modal from "react-modal";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import { orderApi } from "../../../api";
+import { GlobalContext } from "../../../context/GlobalState";
 
 Modal.setAppElement("#root");
 const OrderModal = ({ open, setModal, bill }) => {
@@ -10,6 +11,9 @@ const OrderModal = ({ open, setModal, bill }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState();
+  const { order } = useContext(GlobalContext);
+  const pizzaIds = order.map((item) => item.id);
+  const pizzaQuantities = order.map((item) => item.quantity);
   const deliveryDollars = (10 * 1.17798).toFixed(2);
   const orderSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +22,8 @@ const OrderModal = ({ open, setModal, bill }) => {
       address,
       phone,
       bill,
+      pizzaIds,
+      pizzaQuantities,
     };
     await orderApi(data);
     setModal(false);

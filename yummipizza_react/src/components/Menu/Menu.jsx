@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "./Menu.module.css";
 import { fetchData } from "../../api";
+import Loader from "../Common/Loader";
 
 import MenuItem from "../MenuItem/MenuItem";
 import { GlobalContext } from "../../context/GlobalState";
@@ -20,7 +21,7 @@ const Menu = () => {
   }, [setMenu]);
 
   if (menu.length === 0) {
-    return "...";
+    return <Loader />;
   }
 
   return (

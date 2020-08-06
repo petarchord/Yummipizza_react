@@ -7,10 +7,16 @@ import CountUp from "react-countup";
 
 const ShopingCart = () => {
   const { bill } = useContext(GlobalContext);
+  const billDollars = (bill * 1.17798).toFixed(2);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
     <div className={styles.container}>
-      <OrderModal open={modalIsOpen} setModal={setModalIsOpen} bill={bill} />
+      <OrderModal
+        open={modalIsOpen}
+        setModal={setModalIsOpen}
+        bill={bill}
+        billDollars={billDollars}
+      />
       <div className={styles.shoping_cart}>
         <h3>Your shoping cart</h3>
         <Order />
@@ -18,7 +24,7 @@ const ShopingCart = () => {
           Your bill in US dollars:{" "}
           <CountUp
             start={0}
-            end={(bill * 1.17798).toFixed(2)}
+            end={billDollars}
             duration={1.5}
             separator={"."}
             decimals={2}

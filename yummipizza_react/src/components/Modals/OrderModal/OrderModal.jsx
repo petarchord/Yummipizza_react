@@ -6,24 +6,29 @@ import { orderApi } from "../../../api";
 import { GlobalContext } from "../../../context/GlobalState";
 
 Modal.setAppElement("#root");
-const OrderModal = ({ open, setModal, bill }) => {
+const OrderModal = ({ open, setModal, bill, billDollars }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const { order } = useContext(GlobalContext);
-  const pizzaIds = order.map((item) => item.id);
-  const pizzaQuantities = order.map((item) => item.quantity);
+  const orders = [];
+  order.forEach((item) => {
+    orders.push({ id: item.id, quantity: item.quantity });
+  });
+
   const deliveryDollars = (10 * 1.17798).toFixed(2);
+  const totalBillEuros = bill + 10;
+  const totalBillDollars =
+    parseFloat(billDollars) + parseFloat(deliveryDollars);
   const orderSubmit = async (e) => {
     e.preventDefault();
     const data = {
       name,
       address,
       phone,
-      bill,
-      pizzaIds,
-      pizzaQuantities,
+      bill: totalBillEuros,
+      orders,
     };
     await orderApi(data);
     setModal(false);
@@ -107,9 +112,9 @@ const OrderModal = ({ open, setModal, bill }) => {
               <p>Delivery costs in Euros: 10€</p>
               <p>
                 Your total bill in US dollars:
-                {bill + parseFloat(deliveryDollars)}$!
+                {totalBillDollars}$!
               </p>
-              <p>Your total bill in Euros: {bill + 10}€!</p>
+              <p>Your total bill in Euros: {totalBillEuros}€!</p>
             </div>
             <input
               type="submit"

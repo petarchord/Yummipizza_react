@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = "https://yummi-pizza-laravel.herokuapp.com/";
 
 export const fetchData = async () => {
   try {

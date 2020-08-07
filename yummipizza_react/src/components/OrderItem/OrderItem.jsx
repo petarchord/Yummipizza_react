@@ -4,7 +4,7 @@ import { GlobalContext } from "../../context/GlobalState";
 
 const OrderItem = ({ id, name, price, image, quantity }) => {
   const { removeOrderItem } = useContext(GlobalContext);
-  const imageUrl = `http://localhost:8000/storage/pizzas/${image}`;
+  const imageUrl = `https://yummi-pizza-laravel.herokuapp.com/storage/pizzas/${image}`;
   const onRemoveItem = () => {
     const item = {
       id,

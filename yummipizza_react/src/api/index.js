@@ -13,7 +13,7 @@ export const fetchData = async () => {
 
 export const orderApi = async (data) => {
   try {
-    const response = await axios({
+    const { status } = await axios({
       method: "post",
       url: `${baseUrl}/order`,
       data,
@@ -21,7 +21,7 @@ export const orderApi = async (data) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
+    return status;
   } catch (error) {
     console.log("error occurred", error);
   }

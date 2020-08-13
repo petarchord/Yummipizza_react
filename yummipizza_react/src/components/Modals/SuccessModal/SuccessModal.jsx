@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SuccessModal.module.css";
 import Modal from "react-modal";
-const SuccessModal = ({ successOpen, setSuccessModal }) => {
+const SuccessModal = ({ successOpen, setSuccessModal, error }) => {
   return (
     <div className={styles.container}>
       <Modal
@@ -24,20 +24,33 @@ const SuccessModal = ({ successOpen, setSuccessModal }) => {
           },
         }}
       >
-        <div className={styles.success_content}>
-          <img
-            src="https://img.icons8.com/officel/16/000000/checked.png"
-            alt="success-img"
-          />
-          <p>You successfully ordered your food. Buon appetito!</p>
-          <button
-            onClick={() => {
-              setSuccessModal(false);
-            }}
-          >
-            Okay
-          </button>
-        </div>
+        {error === "" ? (
+          <div className={styles.success_content}>
+            <img
+              src="https://img.icons8.com/officel/16/000000/checked.png"
+              alt="success-img"
+            />
+            <p>You successfully ordered your food. Buon appetito!</p>
+            <button
+              onClick={() => {
+                setSuccessModal(false);
+              }}
+            >
+              Okay
+            </button>
+          </div>
+        ) : (
+          <div className={styles.success_content}>
+            <div>{error}</div>
+            <button
+              onClick={() => {
+                setSuccessModal(false);
+              }}
+            >
+              Okay
+            </button>
+          </div>
+        )}
       </Modal>
     </div>
   );

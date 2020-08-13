@@ -41,3 +41,9 @@
 #heading_modal {
   font-size: 30px;
 }
+
+.loader_wrapper {
+  left: 30%;
+  top: -8%;
+  position: relative;
+}

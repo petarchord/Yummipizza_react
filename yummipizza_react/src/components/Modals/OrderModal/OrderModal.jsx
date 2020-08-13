@@ -1,16 +1,18 @@
 import React, { useState, useContext } from "react";
 import styles from "./OrderModal.module.css";
 import Modal from "react-modal";
+import Loader from "../../Common/Loader";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import { orderApi } from "../../../api";
 import { GlobalContext } from "../../../context/GlobalState";
-
 Modal.setAppElement("#root");
 const OrderModal = ({ open, setModal, bill, billDollars }) => {
   const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+  const [loader, setLoader] = useState(false);
   const { order } = useContext(GlobalContext);
   const orders = [];
   order.forEach((item) => {
@@ -30,10 +32,38 @@ const OrderModal = ({ open, setModal, bill, billDollars }) => {
       bill: totalBillEuros,
       orders,
     };
-    await orderApi(data);
+    setLoader(true);
+    let status = await orderApi(data);
+    if (status !== 200) {
+      setError("Something went wrong. Please try again later");
+    }
+    setLoader(false);
     setModal(false);
     setSuccessModalIsOpen(true);
   };
+  const restrictCharacters = (e) => {
+    if (
+      (e.keyCode < 48 || e.keyCode > 57) &&
+      (e.keyCode < 96 || e.keyCode > 105)
+    ) {
+      if (e.keyCode !== 8 && e.keyCode !== 107 && e.keyCode !== 9) {
+        e.preventDefault();
+      }
+    }
+  };
+
+  const restrictDigits = (e) => {
+    if (
+      (e.keyCode < 65 || e.keyCode > 90) &&
+      e.keyCode !== 8 &&
+      e.keyCode !== 32 &&
+      e.keyCode !== 16 &&
+      e.keyCode !== 9
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Modal
@@ -68,6 +98,13 @@ const OrderModal = ({ open, setModal, bill, billDollars }) => {
         >
           x
         </button>
+        {loader ? (
+          <div className={styles.loader_wrapper}>
+            <Loader />
+          </div>
+        ) : (
+          ""
+        )}
         <form
           onSubmit={(e) => {
             orderSubmit(e);
@@ -82,6 +119,9 @@ const OrderModal = ({ open, setModal, bill, billDollars }) => {
                 required
                 onChange={(e) => {
                   setName(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  restrictDigits(e);
                 }}
               />
             </div>
@@ -105,10 +145,15 @@ const OrderModal = ({ open, setModal, bill, billDollars }) => {
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
+                onKeyDown={(e) => {
+                  restrictCharacters(e);
+                }}
               />
             </div>
             <div className={styles.bill}>
-              <p>Delivery costs in US Dollars: {parseFloat(deliveryDollars)}</p>
+              <p>
+                Delivery costs in US Dollars: {parseFloat(deliveryDollars)}$
+              </p>
               <p>Delivery costs in Euros: 10€</p>
               <p>
                 Your total bill in US dollars:
@@ -127,6 +172,7 @@ const OrderModal = ({ open, setModal, bill, billDollars }) => {
       <SuccessModal
         successOpen={successModalIsOpen}
         setSuccessModal={setSuccessModalIsOpen}
+        error={error}
       ></SuccessModal>
     </div>
   );

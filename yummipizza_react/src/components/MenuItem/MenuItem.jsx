@@ -4,7 +4,7 @@ import { GlobalContext } from "../../context/GlobalState";
 
 const MenuItem = ({ id, name, price, image }) => {
   const [quantity, setQuantity] = useState(1);
-  const imageUrl = `http://localhost:8000/storage/pizzas/${image}`;
+  const imageUrl = `https://yummi-pizza-laravel.herokuapp.com/storage/pizzas/${image}`;
   const { increaseBill, addOrderItem } = useContext(GlobalContext);
 
   const AddToShopingCart = () => {
